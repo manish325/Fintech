@@ -1,0 +1,16 @@
+.snackbar {
+    display: flex;
+    background-color: white !important;
+    
+    .first-icon {
+        flex: 0.1;
+    }
+
+    .message {
+        flex: 0.8;
+    }
+
+    .close {
+        flex: 0.1;
+    }
+}

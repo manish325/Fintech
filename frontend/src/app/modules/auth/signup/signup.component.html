@@ -1,0 +1,158 @@
+<mat-vertical-stepper>
+    <mat-step [stepControl]="$any(signupForm.get('personalInformation'))">
+        <ng-template matStepLabel>Personal Information</ng-template>
+        <!-- name, gender, dateOfBirth -->
+        <div class="personal-information">
+            <form action="" [formGroup]="$any(signupForm.get('personalInformation'))">
+
+                <!-- Name -->
+                <mat-form-field>
+                    <mat-label>
+                        Name
+                    </mat-label>
+                    <input type="text" matInput required [formControlName]="'name'">
+                    <mat-error>
+                        Please Enter Name
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Gender -->
+                <mat-form-field>
+                    <mat-label>
+                        Gender
+                    </mat-label>
+                    <mat-select [formControlName]="'gender'" [formControlName]="'gender'">
+                        <mat-option value="M">M</mat-option>
+                        <mat-option value="F">F</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Please Enter Gender
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Date -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" [formControlName]="'dateOfBirth'"
+                        (click)="picker.open()">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </form>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="$any(signupForm.get('contactInformation'))">
+        <ng-template matStepLabel>Contact Information</ng-template>
+        <!-- email, address -->
+        <div class="contact-information">
+            <form action="" [formGroup]="$any(signupForm.get('contactInformation'))">
+                <!-- email -->
+                <mat-form-field>
+                    <mat-label>
+                        Email
+                    </mat-label>
+                    <input type="text" matInput required [formControlName]="'email'">
+                    <mat-error>
+                        Please Enter Email
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Address -->
+                <mat-form-field>
+                    <mat-label>
+                        Address
+                    </mat-label>
+                    <textarea type="text" matInput required [formControlName]="'address'"
+                        rows="4" cols="4"></textarea>
+                    <mat-error>
+                        Please Enter Your Address
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="$any(signupForm.get('accountInformation'))">
+        <ng-template matStepLabel>Account Information</ng-template>
+        <!-- aadhar, pan, username, password, confirm-password, otp -->
+        <div class="account-information">
+            <ng-container *ngIf="!otpSent; else OTP">
+                <form action="" [formGroup]="$any(signupForm.get('accountInformation'))">
+                    <!-- aadhar -->
+                    <mat-form-field>
+                        <mat-label>
+                            Aadhar Card No.
+                        </mat-label>
+                        <input type="number" matInput required [formControlName]="'aadhar'">
+                        <mat-error>
+                            Please Enter Valid Aadhar No.
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- pan -->
+                    <mat-form-field>
+                        <mat-label>
+                            PAN Card No.
+                        </mat-label>
+                        <input type="text" matInput required [formControlName]="'pan'">
+                        <mat-error>
+                            Please Enter Valid PAN Card No.
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- username -->
+                    <mat-form-field>
+                        <mat-label>
+                            Username
+                        </mat-label>
+                        <input type="text" matInput required [formControlName]="'username'">
+                        <mat-error>
+                            Please Enter Username
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- password -->
+                    <mat-form-field>
+                        <mat-label>
+                            Password
+                        </mat-label>
+                        <input type="text" matInput required [formControlName]="'password'">
+                        <mat-error>
+                            Please Enter Password
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- confirm password -->
+                    <mat-form-field>
+                        <mat-label>
+                            Confirm Password
+                        </mat-label>
+                        <input type="text" matInput required
+                            [formControlName]="'confirmPassword'">
+                        <mat-error *ngIf="signupForm.get('accountInformation')?.get('confirmPassword')?.hasError('mismatch')">
+                            Password Do not Match!
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </ng-container>
+
+            <ng-template #OTP>
+                <!-- otp -->
+                <mat-form-field class="otp-form">
+                    <mat-label>
+                        OTP
+                    </mat-label>
+                    <input type="number" matInput required [formControl]="otpFormControl">
+                    <mat-error>
+                        Please Enter Valid OTP
+                    </mat-error>
+                </mat-form-field>
+            </ng-template>
+        </div>
+        <div class="Submit">
+            <button mat-raised-button (click)="handleSubmitActions()"
+                [disabled]="!otpSent && signupForm.invalid">
+                {{ otpSent ? 'Register!' : 'Get OTP'}}
+            </button>
+        </div>
+    </mat-step>
+</mat-vertical-stepper>

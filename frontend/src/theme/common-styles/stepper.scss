@@ -1,0 +1,75 @@
+.login {
+    .login-form {
+        .mat-stepper-vertical {
+            flex: 1;
+            background: transparent !important;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            .mat-step {
+                width: 50%;
+                // border: 2px solid linear-gradient(to bottom right, #00c299, #e5cd70);
+                // border: 2px solid white;
+                padding: 0 2rem;
+
+                .mat-step-header {
+                    .mat-step-label {
+                        color: white !important;
+                    }
+                }
+
+                .personal-information, .contact-information {
+                    display: flex;
+                    
+                    form {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+
+                .account-information {
+                    display: flex;
+
+                    form {
+                        flex: 1;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: 2rem;
+
+                        .mat-mdc-form-field:last-child {
+                            grid-column-start: 1;
+                            grid-column-end: 4;
+                        }
+
+                        .mat-mdc-form-field:nth-child(5) {
+                            grid-column-start: 2;
+                            grid-column-end: 4;
+                        }
+                    }
+
+                    .otp-form {
+                        width: 100%;
+                    }
+
+                }
+
+                .Submit {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 2rem;
+
+                    .mat-mdc-raised-button {
+                        background: #92c97f;
+                        background: #e7cd70;
+                        background: linear-gradient(to right, #00c299, #e5cd70);
+                        color: #001b15 !important;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

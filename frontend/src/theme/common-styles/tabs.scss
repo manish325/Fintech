@@ -1,0 +1,71 @@
+// .login {
+//     .mat-mdc-tab-group {
+//         margin: 0 20% !important;
+
+//         .mat-mdc-tab-body {
+//             overflow: hidden !important;
+//         }
+
+//         .form {
+//             max-height: max-content;
+//             overflow: hidden;
+//             background: #333333;
+//             padding-bottom: 2rem;
+//             border-radius: 1rem;
+//         }
+
+//         .signup {
+//             max-height: 60%;
+//             overflow-y: scroll !important;
+//             padding: 2rem 0 !important;
+//             flex-basis: 100% !important;
+
+//             form {
+//                 flex-basis: 80% !important;
+//             }
+//         }
+
+//         .form::-webkit-scrollbar {
+//             display: none;
+//         }
+
+//         .mat-mdc-tab-body-content {
+//             display: flex !important;
+//             justify-content: center;
+//             padding-top: 5rem;
+//         }
+//     }
+// }
+
+
+
+.login-container {
+    .login {
+        .content {
+            .login-form {
+                .mat-mdc-tab-group {
+                    height: 100%;
+                    .mdc-tab__text-label {
+                        color: #67696e !important;
+                    }
+                    
+                    .mdc-tab-indicator__content--underline {
+                        border-color: white !important;
+                    } 
+
+                    .mat-mdc-tab-body-wrapper {
+                        flex: 1 !important;
+
+                        .mat-mdc-tab-body-content {
+                            display: flex;
+
+                            .form {
+                                flex: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

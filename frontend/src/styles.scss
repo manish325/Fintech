@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./theme/common-styles/tabs.scss";
+@import "./theme/common-styles/button.scss";
+@import "./theme/common-styles/form.scss";
+@import "./theme/common-styles/stepper.scss";
+@import "./theme/common-styles/datepicker.scss";
+
+html, body { height: 100%; margin: 0; padding: 0;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding: 0; max-height: 100vh; overflow: hidden !important;}

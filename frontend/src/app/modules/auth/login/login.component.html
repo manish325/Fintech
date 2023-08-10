@@ -1,0 +1,105 @@
+<main class="login-container">
+    <div class="login">
+        <div class="heading">
+            <h1>Fintech World</h1>
+        </div>
+        <div class="content">
+            <div class="login-heading">
+                <h2>
+                    Login to Your Account
+                </h2>
+            </div>
+            <div class="login-form">
+                <mat-tab-group #tabgroup>
+                    <mat-tab label="login">
+                        <div class="form" [ngClass]="{'sent-password' : temporaryPasswordSent}">
+                            <ng-container *ngIf="!passwordForgotten; else forgotPassword">
+                                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                                    <mat-form-field>
+                                        <mat-label>
+                                            Username
+                                        </mat-label>
+                                        <input type="text" matInput required [formControlName]="'username'">
+                                        <mat-error>
+                                            Please Enter Username
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>
+                                            Password
+                                        </mat-label>
+                                        <input type="text" matInput required [formControlName]="'password'">
+                                        <mat-error>
+                                            Please Enter Password
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <div class="Submit">
+                                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">
+                                            Login to Your Account
+                                        </button>
+                                    </div>
+                                </form>
+                            </ng-container>
+                            <ng-template #forgotPassword>
+                                <form [formGroup]="forgotPasswordForm" (ngSubmit)="forgottenPassword()">
+                                    <ng-container *ngIf="!temporaryPasswordSent">
+                                        <mat-form-field>
+                                            <mat-label>
+                                                Enter Your Email
+                                            </mat-label>
+                                            <input type="text" matInput required [formControlName]="'email'">
+                                            <mat-error>
+                                                Please Enter Correct Email
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </ng-container>
+                                    <ng-container *ngIf="temporaryPasswordSent">
+                                        <div class="password-sent">
+                                            <div class="check-icon">
+                                                <button mat-fab>
+                                                    <mat-icon>check</mat-icon>
+                                                </button>
+                                            </div>
+                                            <div class="message">
+                                                <h1>Temporary password sent!</h1>
+                                                <p>
+                                                    Check your inbox! We've sent an email to
+                                                    {{forgotPasswordForm.value?.email}} with a temporary password.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <div class="Submit">
+                                        <button mat-raised-button (click)="handleSubmitAction()"
+                                            [disabled]="forgotPasswordForm.invalid && !temporaryPasswordSent">
+                                            {{ temporaryPasswordSent ? 'Go Back to login' : 'Submit'}}
+                                        </button>
+                                    </div>
+                                    <div class="go-back" *ngIf="!temporaryPasswordSent">
+                                        <button mat-fab color="accent"
+                                            aria-label="Example icon button with a delete icon"
+                                            (click)="passwordForgotten = false">
+                                            <mat-icon>arrow_backward</mat-icon>
+                                        </button>
+                                    </div>
+                                </form>
+                            </ng-template>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="signup">
+                        <app-signup style="width: 100%;">
+
+                        </app-signup>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <div class="forgot-password" *ngIf="!passwordForgotten && tabgroup.selectedIndex===0">
+                <span>
+                    <button mat-stroked-button (click)="passwordForgotten = true">
+                        Forgot Password ?
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,25 @@
+.login-container {
+    .login {
+        .content {
+            .login-form {
+                .mat-mdc-form-field {
+                    .mat-mdc-text-field-wrapper {
+                        background: #222222 !important;
+
+                        .mdc-floating-label {
+                            color: white !important;
+                        }
+
+                        .mat-mdc-input-element {
+                            color: white !important;
+                        }
+
+                        .mdc-text-field--filled .mdc-line-ripple::after {
+                            border-bottom-color: #096756 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
