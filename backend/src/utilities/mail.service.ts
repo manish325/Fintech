@@ -5,7 +5,7 @@ export const sendMail = async (mailId : string, OTP? : string) => {
         service : 'gmail',
         auth : {
             user : 'ingalemanish7@gmail.com',
-            pass : 'fgismbrmrqikajgg'
+            pass : process.env.GOOGLE_PASS
         }
     });
 
