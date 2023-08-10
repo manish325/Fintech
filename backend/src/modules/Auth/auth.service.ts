@@ -9,6 +9,7 @@ import { Error, model } from "mongoose";
 import { CustomApiError } from "../../error-handlers/exception-handler";
 import { sendMail } from "../../utilities/mail.service";
 import { generateOtp } from "../../utilities/otp.service";
+import Cache from "memory-cache";
 
 
 class AuthService {
@@ -42,6 +43,33 @@ class AuthService {
         }
     }
 
+    async getOtp(req : Request, res : Response) {
+        const {email} = req.body;
+        try {
+            const otp = generateOtp();
+            await sendMail(email, otp);
+            Cache.put(email, otp, 5 * 60 * 1000);
+            res.status(StatusCodes.OK).send({
+                message: 'OTP Sent on email, kindly check!'
+            });
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
+
+    async verifyOtp(req : Request, res : Response, next : NextFunction) {
+        const {email, otp} = req.body;
+        const storedOTP = Cache.get(email);
+        if(storedOTP && otp===storedOTP) {
+            next()
+        } else {
+            res.status(StatusCodes.FORBIDDEN).json({
+                message : 'Invalid OTP'
+            })
+        }
+    }
+
     async signup(req: Request, res: Response, next: NextFunction) {
         const newUser: IUser = req.body;
         const [month, day, year] = (req.body.dateOfBirth as string).split('/').map(Number);
@@ -50,15 +78,7 @@ class AuthService {
         try {
             const createdUser = userModel.create(newUser);
             console.log("User created successfully:", newUser);
-                try {
-                    await sendMail(newUser.email, generateOtp())
-                    res.status(StatusCodes.OK).send({
-                        message: 'OTP Sent on email, kindly check!'
-                    });
-                } catch (e) {
-                    console.log(e);
-                    throw e;
-                }
+                
         } catch (err) {
             if (err instanceof Error.ValidationError && err) {
                 // Handle validation errors

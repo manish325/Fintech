@@ -25,6 +25,11 @@ export const loginValidators = [
     validate
 ];
 
+export const otpValidators = [
+    body('email').isEmail().notEmpty().withMessage("Please Provide Email!"),
+    validate
+]
+
 export const signupValidators = [
     body('name').isString().notEmpty().withMessage("Name is required!"),
     body('username').isString().notEmpty().withMessage("Username is required!"),
